@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-text-primary font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-background-secondary/50 backdrop-blur-md border border-border/50;
+  }
+  
+  .card {
+    @apply glass rounded-xl p-6 transition-all duration-200 hover:border-border-hover;
+  }
+  
+  .btn-primary {
+    @apply bg-primary hover:bg-primary-hover text-background font-medium px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 active:scale-95;
+  }
+  
+  .btn-secondary {
+    @apply bg-background-tertiary hover:bg-border text-text-primary font-medium px-4 py-2 rounded-lg border border-border transition-all duration-200 hover:border-border-hover;
+  }
+  
+  .input {
+    @apply bg-background-secondary border border-border rounded-lg px-4 py-2 text-text-primary placeholder-text-muted focus:outline-none focus:border-primary transition-colors duration-200;
+  }
+  
+  .sidebar-item {
+    @apply flex items-center gap-3 px-4 py-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-background-secondary transition-all duration-200 cursor-pointer;
+  }
+  
+  .sidebar-item.active {
+    @apply text-primary bg-primary/10 border border-primary/20;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-background-secondary;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-border rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-border-hover;
+}
