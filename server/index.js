@@ -544,7 +544,7 @@ app.get('/api/system/stats', async (req, res) => {
 });
 
 // Serve static sites
-app.use('/sites/:siteName', async (req, res, next) => {
+app.get('/sites/:siteName', async (req, res, next) => {
   try {
     const { siteName } = req.params;
     const sitePath = path.join(sitesDir, siteName);
@@ -553,16 +553,36 @@ app.use('/sites/:siteName', async (req, res, next) => {
       return res.status(404).send('Site not found');
     }
     
-    // Serve static files from the site directory
-    express.static(sitePath)(req, res, async (err) => {
-      if (err) return next(err);
-      // If no file matched, fallback to index.html if it exists
-      const indexPath = path.join(sitePath, 'index.html');
-      if (await fs.pathExists(indexPath)) {
-        return res.sendFile(indexPath);
-      }
-      res.status(404).send('File not found');
+    // Try to serve index.html first
+    const indexPath = path.join(sitePath, 'index.html');
+    if (await fs.pathExists(indexPath)) {
+      return res.sendFile(indexPath);
+    }
+    
+    // If no index.html, list directory contents
+    const files = await fs.readdir(sitePath);
+    res.json({ 
+      message: 'No index.html found',
+      files: files,
+      siteName: siteName
     });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Serve static files within sites
+app.get('/sites/:siteName/*', async (req, res, next) => {
+  try {
+    const { siteName } = req.params;
+    const filePath = req.params[0]; // This gets the wildcard part
+    const fullPath = path.join(sitesDir, siteName, filePath);
+    
+    if (!await fs.pathExists(fullPath)) {
+      return res.status(404).send('File not found');
+    }
+    
+    res.sendFile(fullPath);
   } catch (error) {
     next(error);
   }
