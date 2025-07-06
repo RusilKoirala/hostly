@@ -46,7 +46,7 @@ const upload = multer({
   storage: storage,
   fileFilter: (req, file, cb) => {
     // Allow common web files
-    const allowedTypes = /html|css|js|json|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|pdf|txt|md/;
+    const allowedTypes = /html|css|js|json|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|pdf|txt|md|woff2|otf/;
     const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
     if (extname) {
       return cb(null, true);
@@ -360,6 +360,10 @@ app.post('/api/sites/upload', upload.array('files'), async (req, res) => {
     const { siteName } = req.body;
     const files = req.files;
     
+    if (!siteName) {
+      return res.status(400).json({ error: 'Site name is required' });
+    }
+    
     if (!files || files.length === 0) {
       return res.status(400).json({ error: 'No files uploaded' });
     }
@@ -384,6 +388,7 @@ app.post('/api/sites/upload', upload.array('files'), async (req, res) => {
       hasPackageJson: projectType.hasPackageJson
     });
   } catch (error) {
+    console.error('Upload error:', error);
     res.status(500).json({ error: error.message });
   }
 });
