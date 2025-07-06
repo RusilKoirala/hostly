@@ -139,7 +139,7 @@ const Dashboard = ({ sites, systemStats, loading }) => {
                     Open App
                   </a>
                   <a
-                    href={`http://localhost:3001/sites/${site.name}`}
+                    href={`http://192.168.1.77:3001/sites/${site.name}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-secondary text-xs flex items-center justify-center gap-1"
@@ -248,7 +248,7 @@ const Dashboard = ({ sites, systemStats, loading }) => {
                     </a>
                   )}
                   <a
-                    href={`http://localhost:3001/sites/${site.name}`}
+                    href={`http://192.168.1.77:3001/sites/${site.name}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-secondary text-xs"

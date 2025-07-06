@@ -16,7 +16,7 @@ import {
 import toast from 'react-hot-toast';
 import LogsModal from './LogsModal';
 
-const API_BASE = 'http://localhost:3001/api';
+const API_BASE = 'http://192.168.1.77:3001/api';
 
 const Sites = ({ sites, onDelete, onRefresh }) => {
   const [deletingSite, setDeletingSite] = useState(null);
@@ -279,7 +279,7 @@ const Sites = ({ sites, onDelete, onRefresh }) => {
                   </>
                 ) : (
                   <a
-                    href={`http://localhost:3001/sites/${site.name}`}
+                    href={`http://192.168.1.77:3001/sites/${site.name}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-primary flex-1 flex items-center justify-center gap-2 text-sm"

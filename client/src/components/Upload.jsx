@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
-const API_BASE = 'http://localhost:3001/api';
+const API_BASE = 'http://192.168.1.77:3001/api';
 
 const Upload = ({ onUpload }) => {
   const [siteName, setSiteName] = useState('');
@@ -183,7 +183,7 @@ const Upload = ({ onUpload }) => {
           disabled={uploading}
         />
         <p className="text-xs text-text-muted mt-2">
-          This will be the URL path: localhost:3001/sites/[site-name]
+          This will be the URL path: 192.168.1.77:3001/sites/[site-name]
         </p>
       </div>
 

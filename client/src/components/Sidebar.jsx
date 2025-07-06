@@ -38,7 +38,7 @@ const Sidebar = ({ tabs, activeTab, onTabChange }) => {
       {/* Footer */}
       <div className="p-4 border-t border-border">
         <div className="text-xs text-text-muted text-center">
-          <p>Running on localhost:3001</p>
+          <p>Running on 192.168.1.77:3001</p>
           <p className="mt-1">Sites served at /sites/*</p>
         </div>
       </div>

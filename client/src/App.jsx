@@ -13,7 +13,7 @@ import {
   Settings
 } from 'lucide-react';
 
-const API_BASE = 'http://localhost:3001/api';
+const API_BASE = 'http://192.168.1.77:3001/api';
 
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard');

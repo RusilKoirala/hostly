@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { X, Download, RefreshCw, Terminal } from 'lucide-react';
 import toast from 'react-hot-toast';
 
-const API_BASE = 'http://localhost:3001/api';
+const API_BASE = 'http://192.168.1.77:3001/api';
 
 const LogsModal = ({ site, onClose }) => {
   const [logs, setLogs] = useState([]);

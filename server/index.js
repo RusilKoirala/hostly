@@ -19,7 +19,9 @@ app.use(helmet({
   contentSecurityPolicy: false,
 }));
 app.use(express.json());
-app.use(express.static('public'));
+
+// Serve the built frontend
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
 // Process management
 const runningProcesses = new Map();
@@ -564,6 +566,11 @@ app.use('/sites/:siteName', async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+});
+
+// Catch-all route to serve the frontend
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
 // Error handling middleware
