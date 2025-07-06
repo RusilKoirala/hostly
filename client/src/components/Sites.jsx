@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import LogsModal from './LogsModal';
+import FrameworkIcon from './FrameworkIcon';
 
 const API_BASE = 'http://192.168.1.77:3001/api';
 
@@ -197,7 +198,11 @@ const Sites = ({ sites, onDelete, onRefresh }) => {
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                    {getProjectTypeIcon(site.projectType)}
+                    <FrameworkIcon 
+                      type={site.projectType} 
+                      framework={site.framework || site.projectType}
+                      className="w-5 h-5"
+                    />
                   </div>
                   <div>
                     <h3 className="font-semibold text-text-primary">{site.name}</h3>

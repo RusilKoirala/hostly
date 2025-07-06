@@ -73,30 +73,68 @@ async function detectProjectType(projectPath) {
     const scripts = packageJson.scripts || {};
     const dependencies = { ...packageJson.dependencies, ...packageJson.devDependencies };
 
+    // Check for React (must be checked before Vite/Next.js)
+    const hasReact = dependencies.react || dependencies['react-dom'];
+    
     // Check for Vite
-    if (dependencies.vite || scripts.dev?.includes('vite')) {
-      return { type: 'vite', hasPackageJson: true, packageJson };
+    if (dependencies.vite || scripts.dev?.includes('vite') || scripts.build?.includes('vite')) {
+      return { 
+        type: hasReact ? 'react-vite' : 'vite', 
+        hasPackageJson: true, 
+        packageJson,
+        framework: hasReact ? 'React + Vite' : 'Vite'
+      };
     }
 
     // Check for Next.js
-    if (dependencies.next || scripts.dev?.includes('next')) {
-      return { type: 'next', hasPackageJson: true, packageJson };
+    if (dependencies.next || scripts.dev?.includes('next') || scripts.build?.includes('next')) {
+      return { 
+        type: 'next', 
+        hasPackageJson: true, 
+        packageJson,
+        framework: 'Next.js'
+      };
     }
 
     // Check for Express
     if (dependencies.express || scripts.start?.includes('node') || scripts.dev?.includes('nodemon')) {
-      return { type: 'express', hasPackageJson: true, packageJson };
+      return { 
+        type: 'express', 
+        hasPackageJson: true, 
+        packageJson,
+        framework: 'Express.js'
+      };
+    }
+
+    // Check for React (standalone)
+    if (hasReact) {
+      return { 
+        type: 'react', 
+        hasPackageJson: true, 
+        packageJson,
+        framework: 'React'
+      };
     }
 
     // Check for other Node.js projects
     if (scripts.start || scripts.dev) {
-      return { type: 'node', hasPackageJson: true, packageJson };
+      return { 
+        type: 'node', 
+        hasPackageJson: true, 
+        packageJson,
+        framework: 'Node.js'
+      };
     }
 
-    return { type: 'static', hasPackageJson: true, packageJson };
+    return { 
+      type: 'static', 
+      hasPackageJson: true, 
+      packageJson,
+      framework: 'Static Site'
+    };
   } catch (error) {
     console.error('Error detecting project type:', error);
-    return { type: 'static', hasPackageJson: false };
+    return { type: 'static', hasPackageJson: false, framework: 'Static Site' };
   }
 }
 
@@ -245,34 +283,34 @@ async function startProject(projectName) {
     // Start the process
     addLogEntry(projectName, 'system', `Starting ${projectType.type} project on port ${port}...`);
     
-    const process = spawn(command, args, {
+    const childProcess = spawn(command, args, {
       cwd: projectPath,
       stdio: ['ignore', 'pipe', 'pipe'],
       env: { ...process.env, PORT: port.toString() }
     });
 
     // Handle process output
-    process.stdout.on('data', (data) => {
+    childProcess.stdout.on('data', (data) => {
       addLogEntry(projectName, 'stdout', data);
     });
 
-    process.stderr.on('data', (data) => {
+    childProcess.stderr.on('data', (data) => {
       addLogEntry(projectName, 'stderr', data);
     });
 
-    process.on('close', (code) => {
+    childProcess.on('close', (code) => {
       addLogEntry(projectName, 'system', `Process exited with code ${code}`);
       runningProcesses.delete(projectName);
       projectPorts.delete(projectName);
     });
 
-    process.on('error', (error) => {
+    childProcess.on('error', (error) => {
       addLogEntry(projectName, 'system', `Process error: ${error.message}`);
       runningProcesses.delete(projectName);
       projectPorts.delete(projectName);
     });
 
-    runningProcesses.set(projectName, process);
+    runningProcesses.set(projectName, childProcess);
     addLogEntry(projectName, 'system', `Project started successfully`);
 
     return { success: true, port, type: projectType.type };
@@ -339,6 +377,7 @@ app.get('/api/sites', async (req, res) => {
           hasIndex,
           status: isRunning ? 'running' : 'stopped',
           projectType: projectType.type,
+          framework: projectType.framework,
           hasPackageJson: projectType.hasPackageJson,
           port: port || null,
           createdAt: stats.birthtime,

@@ -8,6 +8,7 @@ import {
   Play,
   Code
 } from 'lucide-react';
+import FrameworkIcon from './FrameworkIcon';
 
 const Dashboard = ({ sites, systemStats, loading }) => {
   const formatBytes = (bytes) => {
@@ -114,9 +115,11 @@ const Dashboard = ({ sites, systemStats, loading }) => {
               <div key={site.name} className="p-4 bg-green-500/5 border border-green-500/20 rounded-lg">
                 <div className="flex items-center justify-between mb-2">
                   <h4 className="font-medium text-text-primary">{site.name}</h4>
-                  <span className="text-xs bg-green-500/20 text-green-500 px-2 py-1 rounded-full">
-                    {site.projectType}
-                  </span>
+                  <FrameworkIcon 
+                    type={site.projectType} 
+                    framework={site.framework || site.projectType}
+                    className="w-4 h-4"
+                  />
                 </div>
                 <div className="space-y-1 text-sm">
                   <div className="flex justify-between">
@@ -220,14 +223,14 @@ const Dashboard = ({ sites, systemStats, loading }) => {
           <div className="space-y-3">
             {sites.slice(0, 5).map((site) => (
               <div key={site.name} className="flex items-center justify-between p-3 bg-background-tertiary rounded-lg">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
-                    {site.hasPackageJson ? (
-                      <Code className="w-4 h-4 text-primary" />
-                    ) : (
-                      <Globe className="w-4 h-4 text-primary" />
-                    )}
-                  </div>
+                                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <FrameworkIcon 
+                        type={site.projectType} 
+                        framework={site.framework || site.projectType}
+                        className="w-4 h-4"
+                      />
+                    </div>
                   <div>
                     <p className="font-medium text-text-primary">{site.name}</p>
                     <p className="text-xs text-text-muted">
