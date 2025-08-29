@@ -1,6 +1,6 @@
 # Hostly - Modern Web Hosting Platform
 
-A sleek, modern web hosting platform similar to Vercel/Netlify with a beautiful dark-themed UI inspired by Cursor.com. Built with Node.js, Express, React, and Tailwind CSS.
+A sleek, modern web hosting platform similar to Vercel/Netlify. Built with Node.js, Express, React, and Tailwind CSS.
 
 ![Hostly Dashboard](https://img.shields.io/badge/Status-Ready-brightgreen)
 ![Node.js](https://img.shields.io/badge/Node.js-18+-green)
@@ -31,7 +31,7 @@ A sleek, modern web hosting platform similar to Vercel/Netlify with a beautiful 
 
 1. **Clone the repository**
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/RusilKoirala/hostly/
    cd hostly
    ```
 
