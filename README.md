@@ -7,19 +7,19 @@ A sleek, modern web hosting platform similar to Vercel/Netlify with a beautiful 
 ![React](https://img.shields.io/badge/React-19-blue)
 ![Tailwind](https://img.shields.io/badge/Tailwind-3-purple)
 
-## ✨ Features
+##  Features
 
-- **🎨 Modern Dark UI** - Beautiful interface inspired by Cursor.com with glass morphism effects
-- **📁 File Upload** - Drag & drop file upload for static websites
-- **🔗 GitHub Integration** - Clone repositories directly from GitHub
-- **📊 Real-time Monitoring** - CPU, memory, and system statistics
-- **🚀 Auto-serving** - Sites automatically served at `/sites/[site-name]`
-- **📱 Responsive Design** - Works perfectly on desktop and mobile
-- **⚡ Fast & Lightweight** - Built with Vite for optimal performance
-- **🔔 Notifications** - Toast notifications for all actions
-- **🗑️ Site Management** - Delete, view, and manage hosted sites
 
-## 🚀 Quick Start
+- ** File Upload** - Drag & drop file upload for static websites
+- ** GitHub Integration** - Clone repositories directly from GitHub
+- ** Real-time Monitoring** - CPU, memory, and system statistics
+- ** Auto-serving** - Sites automatically served at `/sites/[site-name]`
+- ** Responsive Design** - Works perfectly on desktop and mobile
+- ** Fast & Lightweight** - Built with Vite for optimal performance
+- ** Notifications** - Toast notifications for all actions
+- ** Site Management** - Delete, view, and manage hosted sites
+
+##  Quick Start
 
 ### Prerequisites
 
@@ -65,7 +65,7 @@ npm install
 npm run dev
 ```
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 hostly/
@@ -82,7 +82,7 @@ hostly/
 └── package.json           # Root package.json
 ```
 
-## 🎯 Usage
+##  Usage
 
 ### Uploading a Website
 
@@ -110,7 +110,7 @@ hostly/
 - Fonts (`.woff`, `.woff2`, `.ttf`, `.eot`)
 - Other web assets (`.json`, `.txt`, `.md`, `.pdf`)
 
-## 🔧 Configuration
+##  Configuration
 
 ### Environment Variables
 
@@ -156,7 +156,7 @@ The UI uses Tailwind CSS with custom colors defined in `client/tailwind.config.j
 - `GET /api/system/stats` - Get system statistics
 - `GET /sites/:siteName` - Serve a hosted site
 
-## 🎨 UI Components
+##  UI Components
 
 The application includes several reusable components:
 
@@ -166,7 +166,7 @@ The application includes several reusable components:
 - **Upload** - File upload with drag & drop
 - **System** - Real-time system monitoring
 
-## 🔒 Security Features
+##  Security Features
 
 - File type validation for uploads
 - CORS configuration
@@ -174,7 +174,7 @@ The application includes several reusable components:
 - Input sanitization
 - Error handling middleware
 
-## 🚀 Deployment
+##  Deployment
 
 ### Production Build
 
@@ -209,7 +209,7 @@ EXPOSE 3001
 CMD ["npm", "start"]
 ```
 
-## 🤝 Contributing
+##  Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -217,11 +217,11 @@ CMD ["npm", "start"]
 4. Test thoroughly
 5. Submit a pull request
 
-## 📝 License
+##  License
 
 This project is licensed under the ISC License.
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - Inspired by Vercel and Netlify
 - UI design inspired by Cursor.com
@@ -230,4 +230,4 @@ This project is licensed under the ISC License.
 
 ---
 
-**Happy Hosting! 🚀** 
+**Happy Hosting! ** 
